@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paws_frontend/widgets/animal_info/options_row.dart';
 
 class IconRow extends StatelessWidget {
   const IconRow({super.key});
@@ -32,7 +33,44 @@ class IconRow extends StatelessWidget {
                   color: Colors.black),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          18,
+                          18,
+                          18,
+                          0,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            InkWell(
+                                onTap: () {},
+                                child: const OptionsRow(
+                                    text: 'Edite state',
+                                    icon: Icons.edit_outlined)),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            InkWell(
+                                onTap: () {},
+                                child: const OptionsRow(
+                                  text: 'Delete',
+                                  icon: Icons.delete_forever_outlined,
+                                  isDelet: true,
+                                )),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 shape: const CircleBorder(),
