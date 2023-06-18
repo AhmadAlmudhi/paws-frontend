@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/tabs_screens/MyFav.dart';
+import '../../screens/tabs_screens/MyPost.dart';
+import '../../screens/tabs_screens/MyRequest.dart';
+
 class tabs extends StatefulWidget {
   const tabs({super.key});
 
   @override
-  State<tabs> createState() => _tabsState();
+  State<tabs> createState() => tabsState();
 }
 
-class _tabsState extends State<tabs> with SingleTickerProviderStateMixin {
+class tabsState extends State<tabs> with SingleTickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -24,17 +28,19 @@ class _tabsState extends State<tabs> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueGrey,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+
           child: Column(
             children: [
               const SizedBox(height: 50),
               Container(
                 // height: 20,
                 width: MediaQuery.of(context).size.height,
+
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5)),
@@ -61,7 +67,11 @@ class _tabsState extends State<tabs> with SingleTickerProviderStateMixin {
                     )
                   ],
                 ),
-              )
+              ),
+              Expanded(
+                  child: TabBarView(
+                      controller: tabController,
+                      children: const [MyPosts(), MyRequest(), Fav()]))
             ],
           ),
         ),
