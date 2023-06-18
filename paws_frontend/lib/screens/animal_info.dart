@@ -50,31 +50,13 @@ class AnimalInfo extends StatelessWidget {
                         ),
                       ),
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(18, 14, 18, 0),
-                        child: Column(
+                        padding: EdgeInsets.fromLTRB(24, 18, 24, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Name',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
-                                ),
-                                Icon(Icons.favorite_border_sharp)
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(18, 14, 18, 0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InfoColumn(info1: 'type', info2: 'breed', info3: 'color', info4: 'age'),
-                                 InfoColumn(info1: 'gender', info2: 'fixed', info3: 'vaccinated', info4: 'microchipped'), 
+                            InfoColumn(info1: 'Name',info2: 'type', info3: 'breed', info4: 'color', info5: 'age'),
+                           InfoColumn(info1: 'status', info2: 'gender', info3: 'fixed', info4: 'vaccinated', info5: 'microchipped'), 
 
-                                ],
-                              ),
-                            ),
                           ],
                         ),
                       ),
