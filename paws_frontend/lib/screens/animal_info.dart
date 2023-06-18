@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:paws_frontend/screens/home_screen.dart';
+import 'package:paws_frontend/widgets/general_widgets/button.dart';
 
 import '../widgets/animal_info/icon_row.dart';
 import '../widgets/animal_info/info_column.dart';
@@ -136,23 +138,7 @@ class AnimalInfo extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shape: const StadiumBorder(),
-                    padding: const EdgeInsets.all(14),
-                    backgroundColor: const Color.fromARGB(255, 226, 172, 117),
-                    fixedSize: const Size(244, 52),
-                    elevation: 0,
-                  ),
-                  child: const Text(
-                    "Visit profile",
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Color.fromARGB(202, 255, 255, 255),
-                    ),
-                  ),
-                ),
+                const Button(text: 'Visit profile', pageName: HomeScreen())
               ],
             ),
           ],
