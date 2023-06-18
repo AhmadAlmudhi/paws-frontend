@@ -60,7 +60,7 @@ class IconRow extends StatelessWidget {
                             InkWell(
                                 onTap: () {},
                                 child: const OptionsRow(
-                                  text: 'Delet',
+                                  text: 'Delete',
                                   icon: Icons.delete_forever_outlined,
                                   isDelet: true,
                                 )),
