@@ -52,13 +52,33 @@ class IconRow extends StatelessWidget {
                             InkWell(
                                 onTap: () {},
                                 child: const OptionsRow(
-                                    text: 'Edite state',
+                                    text: 'Edite post',
                                     icon: Icons.edit_outlined)),
                             const SizedBox(
                               height: 8,
                             ),
                             InkWell(
-                                onTap: () {},
+                                onTap: () => showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                        title: const Text('Delete post'),
+                                        content: const Text(
+                                            'Are you sure you wants to delete this post?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                context, 'Cancel'),
+                                            child: const Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'Delete'),
+                                            child: const Text('Delete',style: TextStyle(color: Colors.red),),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                 child: const OptionsRow(
                                   text: 'Delete',
                                   icon: Icons.delete_forever_outlined,
