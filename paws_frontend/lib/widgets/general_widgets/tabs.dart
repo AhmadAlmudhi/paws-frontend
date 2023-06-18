@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class tabs extends StatefulWidget {
-   const tabs({super.key});
+  const tabs({super.key});
 
   @override
   State<tabs> createState() => _tabsState();
@@ -26,13 +26,12 @@ class _tabsState extends State<tabs> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
-      
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Container(
                 // height: 20,
                 width: MediaQuery.of(context).size.height,
@@ -42,12 +41,12 @@ class _tabsState extends State<tabs> with SingleTickerProviderStateMixin {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       child: TabBar(
                         // indicator: BoxDecoration(color: Colors.black),
                         indicatorColor: Colors.amberAccent,
                         controller: tabController,
-                        tabs: [
+                        tabs: const [
                           Tab(
                             text: "Request",
                           ),
