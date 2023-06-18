@@ -6,9 +6,10 @@ class OffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        backgroundColor: Colors.grey,
-        body: Center(
-          child: Text("NAV1"),
-        ));
+      backgroundColor: Colors.grey,
+      body: Center(
+        child: Text("Offers Screen"),
+      ),
+    );
   }
 }

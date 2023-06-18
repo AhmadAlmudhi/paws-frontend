@@ -6,9 +6,10 @@ class RequestsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        backgroundColor: Colors.grey,
-        body: Center(
-          child: Text("nav2"),
-        ));
+      backgroundColor: Colors.grey,
+      body: Center(
+        child: Text("Requests Screen"),
+      ),
+    );
   }
 }
