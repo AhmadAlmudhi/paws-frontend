@@ -33,6 +33,7 @@ class tabsState extends State<tabs> with SingleTickerProviderStateMixin {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
+
           child: Column(
             children: [
               const SizedBox(height: 50),

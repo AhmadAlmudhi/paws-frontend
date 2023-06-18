@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
-class nav1 extends StatelessWidget {
-  const nav1({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.grey,
       body: Center(
-
-        child: Text("NAV1"),
-        
-        
-      )
+        child: Text("Profile Screen"),
+      ),
     );
   }
 }

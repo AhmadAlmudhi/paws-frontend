@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:paws_frontend/screens/Nav_screens/nav_bar_screens.dart';
 
 import 'auth_screens/login_screen.dart';
 
@@ -10,12 +11,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return !GetStorage().hasData("token")
-        ? const LoginScreen()
-        : const Scaffold(
-            body: Center(
-              child: Text('Hello World!'),
-            ),
-          );
+    return GetStorage().hasData("token")
+        ? const NavBarScreens()
+        : const LoginScreen();
   }
 }
