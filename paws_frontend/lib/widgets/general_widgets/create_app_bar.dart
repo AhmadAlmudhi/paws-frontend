@@ -8,10 +8,8 @@ AppBar createAppBar({
 }) {
   return AppBar(
     backgroundColor: Colors.white,
-    title: Text(
-      title,
-      style: const TextStyle(color: Colors.black),
-    ),
+    foregroundColor: Colors.black,
+    title: Text(title),
     actions: [
       IconButton(
         onPressed: () {
@@ -20,10 +18,7 @@ AppBar createAppBar({
             MaterialPageRoute(builder: (context) => iconDestination),
           );
         },
-        icon: Icon(
-          icon,
-          color: Colors.black,
-        ),
+        icon: Icon(icon),
       ),
     ],
   );

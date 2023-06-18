@@ -45,6 +45,7 @@ class PostsBuilder extends StatelessWidget {
                         age: element["age"],
                         favoritesNumber: element["favorites_number"],
                         imagesLinks: element["images"],
+                        id: element["post_id"],
                       ),
                     );
                   }
