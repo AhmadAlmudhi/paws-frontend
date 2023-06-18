@@ -89,73 +89,77 @@ class AnimalInfo extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.fromLTRB(18, 14, 18, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CircleAvatar(
-                    radius: 27,
-                    backgroundImage: NetworkImage(
-                        'https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Name',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 27,
+                        backgroundImage: NetworkImage(
+                            'https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Name',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'Owner',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 95, 94, 94),
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          'Owner',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 95, 94, 94),
-                          ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '24.1,2022',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 95, 94, 94),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 178,
-                  ),
-                  Text(
-                    '24.1,2022',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 95, 94, 94),
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-             const Padding(
-               padding: EdgeInsets.fromLTRB(32, 14, 32, 0),
-               child: Text(
-                      'hi ! martha want to go home , she is happy and excited cat love to play to much ',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 95, 94, 94),
-                      ),
-                    ),
-             ),
-             SizedBox(
-              height: 16,
-             ),
-             ElevatedButton(
-                onPressed: () {
-                  
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: const StadiumBorder(),
-                  padding: const EdgeInsets.all(14),
-                  backgroundColor: const Color.fromARGB(255, 226, 172, 117),
-                  fixedSize: const Size(244, 52),
-                  elevation: 0,
-                ),
-                child: const Text(
-                  "Visit profile",
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Color.fromARGB(202, 255, 255, 255),
-                  ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(32, 14, 32, 0),
+              child: Text(
+                'hi ! martha want to go home , she is happy and excited cat love to play to much ',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 95, 94, 94),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                shape: const StadiumBorder(),
+                padding: const EdgeInsets.all(14),
+                backgroundColor: const Color.fromARGB(255, 226, 172, 117),
+                fixedSize: const Size(244, 52),
+                elevation: 0,
+              ),
+              child: const Text(
+                "Visit profile",
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Color.fromARGB(202, 255, 255, 255),
+                ),
+              ),
+            ),
           ],
         ),
       ),
