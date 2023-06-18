@@ -4,7 +4,9 @@ import '../../../screens/auth_screens/signup_screen.dart';
 
 class AuthMessage extends StatelessWidget {
   const AuthMessage({
-    super.key, required this.message, required this.clickmessage,
+    super.key,
+    required this.message,
+    required this.clickmessage,
   });
   final String message;
   final String clickmessage;
@@ -13,7 +15,7 @@ class AuthMessage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-         Text(message),
+        Text(message),
         TextButton(
           onPressed: () {
             Navigator.pushAndRemoveUntil(
