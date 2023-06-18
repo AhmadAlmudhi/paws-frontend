@@ -12,11 +12,11 @@ class NavBarScreens extends StatefulWidget {
 }
 
 class NavBarScreensState extends State<NavBarScreens> {
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   List myScreenList = [
-    const OffersScreen(),
     const RequestsScreen(),
+    const OffersScreen(),
     const ProfileScreen()
   ];
   @override
