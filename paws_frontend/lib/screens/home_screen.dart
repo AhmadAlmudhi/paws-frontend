@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:paws_frontend/widgets/general_widgets/nav_bar_screens.dart';
+import 'package:paws_frontend/screens/Nav_screens/nav_bar_screens.dart';
 
 import 'auth_screens/login_screen.dart';
 
