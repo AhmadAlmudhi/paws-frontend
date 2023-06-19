@@ -34,6 +34,12 @@ class VerfiyButton extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (Route<dynamic> route) => false);
             }
+          }if (res.statusCode == 400) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('Wronge code'),
+              duration: Duration(seconds: 6),
+            ));
           }
         },
         child: const Text("Verfiy"),
