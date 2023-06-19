@@ -61,18 +61,20 @@ class _ProfileBuilderState extends State<ProfileBuilder> {
                   appBar: AppBar(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.black,
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                            (route) => false);
-                        GetStorage().erase();
-                        setState(() {});
-                      },
-                      icon: const Icon(Icons.logout),
-                    ),
+                    leading: !showEdit
+                        ? null
+                        : IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                  (route) => false);
+                              GetStorage().erase();
+                              setState(() {});
+                            },
+                            icon: const Icon(Icons.logout),
+                          ),
                     title: const Text("Profile"),
                     actions: [
                       Visibility(

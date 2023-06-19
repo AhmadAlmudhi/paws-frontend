@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:http/http.dart';
+import 'package:paws_frontend/screens/Nav_screens/profile_screen.dart';
 
 import '../services/post_api.dart';
 import '../widgets/animal_info/info_column.dart';
@@ -139,37 +140,49 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 27,
-                                    backgroundImage:
-                                        NetworkImage(userInfo["image"]),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(12, 0, 0, 0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          userInfo["name"],
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          "@${userInfo["username"]}",
-                                          style: const TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 95, 94, 94),
-                                          ),
-                                        ),
-                                      ],
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProfileScreen(
+                                        id: userInfo["user_id"],
+                                      ),
                                     ),
-                                  )
-                                ],
+                                  );
+                                },
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 27,
+                                      backgroundImage:
+                                          NetworkImage(userInfo["image"]),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          12, 0, 0, 0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            userInfo["name"],
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "@${userInfo["username"]}",
+                                            style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 95, 94, 94),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ],
                           ),
