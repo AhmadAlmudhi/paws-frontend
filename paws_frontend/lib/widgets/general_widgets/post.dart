@@ -56,7 +56,7 @@ class Post extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     color: const Color.fromARGB(150, 0, 0, 0),
-                    height: MediaQuery.of(context).size.height * 0.08,
+                    height: MediaQuery.of(context).size.height * 0.1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
