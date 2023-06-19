@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paws_frontend/widgets/general_widgets/tabs.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo(
@@ -13,7 +14,9 @@ class UserInfo extends StatelessWidget {
       required this.age,
       required this.email,
       required this.whatsapp,
-      required this.phone});
+      required this.phone,
+      required this.userId,
+      required this.favorites});
 
   final String name,
       username,
@@ -25,7 +28,9 @@ class UserInfo extends StatelessWidget {
       email,
       whatsapp,
       phone;
-  final int age;
+  final int age, userId;
+
+  final List favorites;
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +124,10 @@ class UserInfo extends StatelessWidget {
                 child: const Text("contact"),
               )
             ],
+          ),
+          tabs(
+            userId: userId,
+            favorites: favorites,
           ),
         ],
       ),

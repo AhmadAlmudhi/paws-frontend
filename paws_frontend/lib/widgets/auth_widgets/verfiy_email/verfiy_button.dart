@@ -36,13 +36,15 @@ class VerfiyButton extends StatelessWidget {
             }
           }
           if (res.statusCode == 400) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                backgroundColor: Colors.red,
-                content: Text('Wronge code'),
-                duration: Duration(seconds: 6),
-              ),
-            );
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('Wronge code'),
+                  duration: Duration(seconds: 6),
+                ),
+              );
+            }
           }
         },
         child: const Text("Verfiy"),

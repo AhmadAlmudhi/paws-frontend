@@ -10,6 +10,14 @@ Future<Response> getUser(int id) async {
   return response;
 }
 
+Future<Response> getMyInfo() async {
+  Uri uri = Uri.parse("http://0.0.0.0:8080/user/get_my_info");
+  Response response =
+      await get(uri, headers: {"authorization": GetStorage().read("token")});
+
+  return response;
+}
+
 Future<Response> updateProfile(Map data) async {
   Uri uri = Uri.parse("http://0.0.0.0:8080/user/update_profile");
   Response response = await put(uri,

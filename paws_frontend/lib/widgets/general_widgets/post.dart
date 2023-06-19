@@ -13,11 +13,13 @@ class Post extends StatelessWidget {
     required this.imagesLinks,
     required this.color,
     required this.id,
+    required this.update,
   });
 
   final String name, type, breed, color;
   final int age, favoritesNumber, id;
   final List imagesLinks;
+  final Function() update;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +30,13 @@ class Post extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => PostDetailsScreen(
-                      id: id,
-                    )),
-          );
+              builder: (context) => PostDetailsScreen(
+                id: id,
+              ),
+            ),
+          ).then((value) {
+            update.call();
+          });
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
