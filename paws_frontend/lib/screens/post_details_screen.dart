@@ -21,7 +21,7 @@ class PostDetailsScreen extends StatefulWidget {
 }
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
- bool isFav = false;
+  bool isFav = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,8 +113,6 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                  print(snapshot.data?.statusCode);
-
                   if (snapshot.data?.statusCode == 200) {
                     var userInfo =
                         jsonDecode(snapshot.data!.body)["user_info"][0];
@@ -207,20 +205,19 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                           toggleFavorite(widget.id);
-                                           isFav = !isFav;
-                                           setState(() {
-                                            
-                                           });
+                                          toggleFavorite(widget.id);
+                                          isFav = !isFav;
+                                          setState(() {});
                                         },
-                                        child: !isFav ?  const Icon(
-                                          Icons.favorite_border,
-                                          color: Colors.black,
-                                        ): const Icon(
-                                          Icons.favorite,
-                                          color: Colors.red,
-                                        ) ,
-                                        
+                                        child: !isFav
+                                            ? const Icon(
+                                                Icons.favorite_border,
+                                                color: Colors.black,
+                                              )
+                                            : const Icon(
+                                                Icons.favorite,
+                                                color: Colors.red,
+                                              ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(

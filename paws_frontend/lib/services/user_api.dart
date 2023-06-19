@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 
 Future<Response> getUser(int id) async {
-  Uri uri = Uri.parse("http://0.0.0.0:8080/user/get_user");
+  Uri uri = Uri.parse("http://0.0.0.0:8080/user/get_user/$id");
   Response response =
       await get(uri, headers: {"authorization": GetStorage().read("token")});
 
