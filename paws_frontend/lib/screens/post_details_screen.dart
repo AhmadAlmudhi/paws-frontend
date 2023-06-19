@@ -182,12 +182,41 @@ class PostDetailsScreen extends StatelessWidget {
                                   color: Color.fromARGB(255, 95, 94, 94),
                                 ),
                               ),
-                              Text(
-                                dateString,
-                                textAlign: TextAlign.end,
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 95, 94, 94),
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8),
+                                    child: Text(
+                                      dateString,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                        color: Color.fromARGB(255, 95, 94, 94),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.favorite_border,
+                                        color: Colors.black,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 4, right: 8),
+                                        child: Text(
+                                          "${postInfo["favorites_number"]}",
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.file_upload_outlined,
+                                        color: Colors.black,
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
                             ],
                           ),
