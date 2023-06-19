@@ -18,7 +18,8 @@ class SignupButton extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: ElevatedButton(
         style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.black)),
+            backgroundColor:
+                MaterialStatePropertyAll(Color.fromARGB(255, 248, 212, 177))),
         onPressed: () async {
           Response res = await onSubmit.call();
 
@@ -33,7 +34,8 @@ class SignupButton extends StatelessWidget {
                 ),
               );
             }
-          }if (res.statusCode == 400) {
+          }
+          if (res.statusCode == 400) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               backgroundColor: Colors.red,
               content: Text('Please enter all information'),
@@ -41,7 +43,10 @@ class SignupButton extends StatelessWidget {
             ));
           }
         },
-        child: const Text("Signup"),
+        child: const Text(
+          "Signup",
+          style: TextStyle(color: Color.fromARGB(255, 11, 11, 11)),
+        ),
       ),
     );
   }

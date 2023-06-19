@@ -20,7 +20,8 @@ class LoginButton extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: ElevatedButton(
         style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.black)),
+            backgroundColor:
+                MaterialStatePropertyAll(Color.fromARGB(255, 248, 212, 177))),
         onPressed: () async {
           Response res = await onSubmit.call();
 
@@ -44,7 +45,7 @@ class LoginButton extends StatelessWidget {
             );
           }
         },
-        child: const Text("Login"),
+        child: const Text("Login", style: TextStyle(color: Color.fromARGB(255, 11, 11, 11)),),
       ),
     );
   }
