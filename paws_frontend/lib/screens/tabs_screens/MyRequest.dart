@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:paws_frontend/widgets/general_widgets/posts_builder.dart';
 
 class MyRequest extends StatelessWidget {
-  const MyRequest({super.key, required this.userId});
+  const MyRequest(
+      {super.key, required this.userId, required this.userFavorites});
 
   final int userId;
+  final List userFavorites;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class MyRequest extends StatelessWidget {
         PostsBuilder(
           type: 'request',
           id: userId,
+          userFavorites: userFavorites,
         ),
       ],
     );

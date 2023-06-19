@@ -20,7 +20,10 @@ class OffersScreen extends StatelessWidget {
       ),
       body: ListView(
         children: const [
-          PostsBuilder(type: 'offer'),
+          PostsBuilder(
+            type: 'offer',
+            userFavorites: [],
+          ),
         ],
       ),
     );

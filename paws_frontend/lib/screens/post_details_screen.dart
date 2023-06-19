@@ -13,18 +13,21 @@ class PostDetailsScreen extends StatefulWidget {
   const PostDetailsScreen({
     super.key,
     required this.id,
+    required this.userFavorites,
   });
 
   final int id;
+  final List userFavorites;
 
   @override
   State<PostDetailsScreen> createState() => _PostDetailsScreenState();
 }
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
-  bool isFav = false;
   @override
   Widget build(BuildContext context) {
+    bool isFav = widget.userFavorites.contains(widget.id);
+
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.black,
@@ -71,8 +74,11 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                           child: const Text('Cancel'),
                                         ),
                                         TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context, 'Delete'),
+                                          onPressed: () {
+                                            deletePost(widget.id);
+                                            Navigator.pop(context, 'Delete');
+                                            Navigator.pop(context);
+                                          },
                                           child: const Text(
                                             'Delete',
                                             style: TextStyle(color: Colors.red),
@@ -238,10 +244,6 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                         child: Text(
                                           "${postInfo["favorites_number"]}",
                                         ),
-                                      ),
-                                      const Icon(
-                                        Icons.file_upload_outlined,
-                                        color: Colors.black,
                                       ),
                                     ],
                                   )

@@ -52,6 +52,7 @@ class _FavState extends State<Fav> {
                           update: () {
                             setState(() {});
                           },
+                          userFavorites: widget.favorites,
                         ),
                       );
                     }

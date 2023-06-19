@@ -71,8 +71,14 @@ class tabsState extends State<tabs> with SingleTickerProviderStateMixin {
             child: TabBarView(
               controller: tabController,
               children: [
-                MyPosts(userId: widget.userId),
-                MyRequest(userId: widget.userId),
+                MyPosts(
+                  userId: widget.userId,
+                  userFavorites: widget.favorites,
+                ),
+                MyRequest(
+                  userId: widget.userId,
+                  userFavorites: widget.favorites,
+                ),
                 Fav(favorites: widget.favorites),
               ],
             ),

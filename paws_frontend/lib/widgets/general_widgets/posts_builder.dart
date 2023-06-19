@@ -11,10 +11,12 @@ class PostsBuilder extends StatefulWidget {
     super.key,
     required this.type,
     this.id = 0,
+    required this.userFavorites,
   });
 
   final String type;
   final int id;
+  final List userFavorites;
 
   @override
   State<PostsBuilder> createState() => _PostsBuilderState();
@@ -57,6 +59,7 @@ class _PostsBuilderState extends State<PostsBuilder> {
                           update: () {
                             setState(() {});
                           },
+                          userFavorites: widget.userFavorites,
                         ),
                       );
                     }
