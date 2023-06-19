@@ -8,7 +8,7 @@ import '../services/post_api.dart';
 import '../widgets/animal_info/info_column.dart';
 import '../widgets/animal_info/options_row.dart';
 
-class PostDetailsScreen extends StatelessWidget {
+class PostDetailsScreen extends StatefulWidget {
   const PostDetailsScreen({
     super.key,
     required this.id,
@@ -16,6 +16,12 @@ class PostDetailsScreen extends StatelessWidget {
 
   final int id;
 
+  @override
+  State<PostDetailsScreen> createState() => _PostDetailsScreenState();
+}
+
+class _PostDetailsScreenState extends State<PostDetailsScreen> {
+ bool isFav = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +98,7 @@ class PostDetailsScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: FutureBuilder<Response>(
-          future: readPost(id),
+          future: readPost(widget.id),
           builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -199,9 +205,22 @@ class PostDetailsScreen extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      const Icon(
-                                        Icons.favorite_border,
-                                        color: Colors.black,
+                                      InkWell(
+                                        onTap: () {
+                                           toggleFavorite(widget.id);
+                                           isFav = !isFav;
+                                           setState(() {
+                                            
+                                           });
+                                        },
+                                        child: !isFav ?  const Icon(
+                                          Icons.favorite_border,
+                                          color: Colors.black,
+                                        ): const Icon(
+                                          Icons.favorite,
+                                          color: Colors.red,
+                                        ) ,
+                                        
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
