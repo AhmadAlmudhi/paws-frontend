@@ -29,51 +29,46 @@ class tabsState extends State<tabs> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            const SizedBox(height: 50),
+            Container(
+              // height: 20,
+              width: MediaQuery.of(context).size.height,
 
-          child: Column(
-            children: [
-              const SizedBox(height: 50),
-              Container(
-                // height: 20,
-                width: MediaQuery.of(context).size.height,
-
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: TabBar(
-                        // indicator: BoxDecoration(color: Colors.black),
-                        indicatorColor: Colors.amberAccent,
-                        controller: tabController,
-                        tabs: const [
-                          Tab(
-                            text: "Request",
-                          ),
-                          Tab(
-                            text: "Offer",
-                          ),
-                          Tab(
-                            text: "Favorite",
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                  child: TabBarView(
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: TabBar(
+                      // indicator: BoxDecoration(color: Colors.black),
+                      indicatorColor: Colors.amberAccent,
                       controller: tabController,
-                      children: const [MyPosts(), MyRequest(), Fav()]))
-            ],
-          ),
+                      tabs: const [
+                        Tab(
+                          text: "Request",
+                        ),
+                        Tab(
+                          text: "Offer",
+                        ),
+                        Tab(
+                          text: "Favorite",
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+                child: TabBarView(
+                    controller: tabController,
+                    children: const [MyPosts(), MyRequest(), Fav()]))
+          ],
         ),
       ),
     );

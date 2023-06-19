@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
         iconDestination: const UpdateProfileScreen(),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16),
         child: ListView(
           children: const [
             Row(
@@ -59,9 +59,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Text("Male | 20 yo"),
               ],
-            ),
-            SizedBox(
-              height: 40,
             ),
             tabs(),
           ],
