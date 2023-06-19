@@ -35,11 +35,13 @@ class LoginButton extends StatelessWidget {
             }
           }
           if (res.statusCode == 400) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              backgroundColor: Colors.red,
-              content: Text('Wrong email or password'),
-              duration: Duration(seconds: 6),
-            ));
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.red,
+                content: Text('Wrong email or password'),
+                duration: Duration(seconds: 6),
+              ),
+            );
           }
         },
         child: const Text("Login"),
