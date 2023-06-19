@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paws_frontend/widgets/general_widgets/dropdown.dart';
+import 'package:paws_frontend/widgets/general_widgets/posts_builder.dart';
 
 class Fav extends StatelessWidget {
   const Fav({super.key});
@@ -9,6 +10,7 @@ class Fav extends StatelessWidget {
     return ListView(
       children: const [
         dropdown(),
+         PostsBuilder(type: 'offer'),
       ],
     );
   }
