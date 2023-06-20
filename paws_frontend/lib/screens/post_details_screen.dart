@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:http/http.dart';
 import 'package:paws_frontend/screens/Nav_screens/profile_screen.dart';
+import 'package:paws_frontend/widgets/general_widgets/loading.dart';
 
 import '../services/post_api.dart';
 import '../widgets/animal_info/info_column.dart';
@@ -24,9 +25,10 @@ class PostDetailsScreen extends StatefulWidget {
 }
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
+  bool isFav = false;
   @override
   Widget build(BuildContext context) {
-    bool isFav = widget.userFavorites.contains(widget.id);
+    isFav = widget.userFavorites.contains(widget.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -223,10 +225,22 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       InkWell(
-                                        onTap: () {
-                                          toggleFavorite(widget.id);
-                                          isFav = !isFav;
+                                        onTap: () async {
+                                          loading(context);
+                                          await toggleFavorite(widget.id);
+                                          isFav = widget.userFavorites
+                                              .contains(widget.id);
+                                          if (!isFav) {
+                                            widget.userFavorites.add(widget.id);
+                                          } else {
+                                            widget.userFavorites
+                                                .remove(widget.id);
+                                          }
+
                                           setState(() {});
+                                          if (context.mounted) {
+                                            Navigator.pop(context);
+                                          }
                                         },
                                         child: !isFav
                                             ? const Icon(

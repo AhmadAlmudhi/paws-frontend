@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:paws_frontend/services/user_api.dart';
 
+import '../widgets/general_widgets/loading.dart';
+
 //class UpdateProfileScreen extends StatelessWidget
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -71,19 +73,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
         actions: [
           TextButton(
             onPressed: () async {
-              showDialog<String>(
-                context: context,
-                builder: (context) {
-                  return const Scaffold(
-                    backgroundColor: Color.fromARGB(30, 0, 0, 0),
-                    body: Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    ),
-                  );
-                },
-              );
+              loading(context);
               await updateProfile(
                 {
                   "name": nameController.text,
