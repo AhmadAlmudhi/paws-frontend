@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:paws_frontend/services/user_api.dart';
 
 import '../widgets/general_widgets/loading.dart';
+import '../widgets/image_paker.dart';
 
 //class UpdateProfileScreen extends StatelessWidget
 
@@ -37,7 +41,9 @@ class UpdateProfileScreen extends StatefulWidget {
 
 class UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final _formKey = GlobalKey<FormState>();
-
+  Imagepicker controller = Get.put(Imagepicker());
+  dynamic myImage = const NetworkImage(
+      "https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb");
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController =
@@ -91,6 +97,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 Navigator.pop(context);
                 Navigator.pop(context);
               }
+              await updateProfile({"image":controller.imagePath.toString()});
             },
             child: const Text("Done", style: TextStyle(fontSize: 12)),
           ),
@@ -100,14 +107,22 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
         child: ListView(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 50,
-              backgroundImage: NetworkImage(
-                  "https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb"),
+              backgroundImage: controller.imagePath.isNotEmpty
+                  ? FileImage(
+                      File(controller.imagePath.toString()),
+                    )
+                  : myImage,
             ),
             TextButton(
               //---------------
-              onPressed: () {},
+              onPressed: () async {
+                await controller.getImage();
+                setState(() {});
+                print(controller.imagePath);
+                print(File(controller.imagePath.toString()),);
+              },
               child: const Text(
                 "Update Picture",
                 style: TextStyle(color: Colors.blue),
