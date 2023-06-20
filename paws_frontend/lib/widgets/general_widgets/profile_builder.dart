@@ -94,6 +94,7 @@ class _ProfileBuilderState extends State<ProfileBuilder> {
                                   initPhone: phone,
                                   initGender: gender,
                                   initAge: age,
+                                  initImage: image,
                                 ),
                               ),
                             ).then((value) {

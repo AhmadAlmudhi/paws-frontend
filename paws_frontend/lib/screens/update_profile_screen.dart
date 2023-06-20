@@ -10,17 +10,19 @@ import '../widgets/image_paker.dart';
 //class UpdateProfileScreen extends StatelessWidget
 
 class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen(
-      {super.key,
-      required this.initName,
-      required this.initBio,
-      required this.initCountry,
-      required this.initCity,
-      required this.initEmail,
-      required this.initWhatsapp,
-      required this.initPhone,
-      required this.initGender,
-      required this.initAge});
+  const UpdateProfileScreen({
+    super.key,
+    required this.initName,
+    required this.initBio,
+    required this.initCountry,
+    required this.initCity,
+    required this.initEmail,
+    required this.initWhatsapp,
+    required this.initPhone,
+    required this.initGender,
+    required this.initAge,
+    required this.initImage,
+  });
 
   final String initName,
       initBio,
@@ -29,7 +31,8 @@ class UpdateProfileScreen extends StatefulWidget {
       initEmail,
       initWhatsapp,
       initPhone,
-      initGender;
+      initGender,
+      initImage;
 
   final int initAge;
 
@@ -42,8 +45,7 @@ class UpdateProfileScreen extends StatefulWidget {
 class UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   Imagepicker controller = Get.put(Imagepicker());
-  dynamic myImage = const NetworkImage(
-      "https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb");
+
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController =
@@ -93,11 +95,15 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   "age": ageController.text,
                 },
               );
+
+              if (controller.imagePath.isNotEmpty) {
+                await updateProfileImage(File(controller.imagePath.toString()));
+              }
+
               if (context.mounted) {
                 Navigator.pop(context);
                 Navigator.pop(context);
               }
-              await updateProfile({"image":controller.imagePath.toString()});
             },
             child: const Text("Done", style: TextStyle(fontSize: 12)),
           ),
@@ -107,25 +113,32 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
         child: ListView(
           children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: controller.imagePath.isNotEmpty
-                  ? FileImage(
-                      File(controller.imagePath.toString()),
-                    )
-                  : myImage,
-            ),
+            controller.imagePath.isNotEmpty
+                ? Image.file(
+                    File(controller.imagePath.toString()),
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.contain,
+                  )
+                : Image.network(
+                    widget.initImage,
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.contain,
+                  ),
             TextButton(
               //---------------
               onPressed: () async {
                 await controller.getImage();
                 setState(() {});
                 print(controller.imagePath);
-                print(File(controller.imagePath.toString()),);
+                print(
+                  File(controller.imagePath.toString()),
+                );
               },
               child: const Text(
                 "Update Picture",
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.blue, fontSize: 20),
               ),
             ),
             const SizedBox(
