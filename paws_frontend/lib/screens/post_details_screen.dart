@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:http/http.dart';
 import 'package:paws_frontend/screens/Nav_screens/profile_screen.dart';
-import 'package:paws_frontend/widgets/general_widgets/loading.dart';
 
 import '../services/post_api.dart';
 import '../widgets/animal_info/info_column.dart';
@@ -25,11 +24,8 @@ class PostDetailsScreen extends StatefulWidget {
 }
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
-  bool isFav = false;
   @override
   Widget build(BuildContext context) {
-    isFav = widget.userFavorites.contains(widget.id);
-
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.black,
@@ -221,45 +217,11 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                       ),
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      InkWell(
-                                        onTap: () async {
-                                          loading(context);
-                                          await toggleFavorite(widget.id);
-                                          isFav = widget.userFavorites
-                                              .contains(widget.id);
-                                          if (!isFav) {
-                                            widget.userFavorites.add(widget.id);
-                                          } else {
-                                            widget.userFavorites
-                                                .remove(widget.id);
-                                          }
-
-                                          setState(() {});
-                                          if (context.mounted) {
-                                            Navigator.pop(context);
-                                          }
-                                        },
-                                        child: !isFav
-                                            ? const Icon(
-                                                Icons.favorite_border,
-                                                color: Colors.black,
-                                              )
-                                            : const Icon(
-                                                Icons.favorite,
-                                                color: Colors.red,
-                                              ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 4, right: 8),
-                                        child: Text(
-                                          "${postInfo["favorites_number"]}",
-                                        ),
-                                      ),
-                                    ],
+                                  LikeIcon(
+                                    currentPostLikeCount:
+                                        postInfo["favorites_number"],
+                                    id: widget.id,
+                                    userFavorites: widget.userFavorites,
                                   )
                                 ],
                               ),
@@ -335,6 +297,72 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
           },
         ),
       ),
+    );
+  }
+}
+
+class LikeIcon extends StatefulWidget {
+  const LikeIcon(
+      {super.key,
+      required this.currentPostLikeCount,
+      required this.id,
+      required this.userFavorites});
+
+  final List userFavorites;
+  final int id;
+  final int currentPostLikeCount;
+
+  @override
+  State<LikeIcon> createState() => _LikeIconState();
+}
+
+class _LikeIconState extends State<LikeIcon> {
+  late bool isFav;
+  int newPostLikeCount = 0;
+  @override
+  void initState() {
+    newPostLikeCount = widget.currentPostLikeCount;
+    isFav = widget.userFavorites.contains(widget.id);
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        InkWell(
+          onTap: () async {
+            if (!isFav) {
+              //       widget.userFavorites.add(widget.id);
+              newPostLikeCount++;
+              isFav = true;
+            } else {
+              //        widget.userFavorites.remove(widget.id);
+              newPostLikeCount--;
+              isFav = false;
+            }
+            setState(() {});
+            await toggleFavorite(widget.id);
+          },
+          child: !isFav
+              ? const Icon(
+                  Icons.favorite_border,
+                  color: Colors.black,
+                )
+              : const Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 4, right: 8),
+          child: Text(
+            "$newPostLikeCount",
+          ),
+        ),
+      ],
     );
   }
 }
