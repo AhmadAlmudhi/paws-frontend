@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../widgets/general_widgets/image_upload.dart';
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen({super.key});
+  const CreatePostScreen({super.key, required this.type});
+
+  final String type;
 
   @override
   State<CreatePostScreen> createState() => _CreatePostScreenState();
