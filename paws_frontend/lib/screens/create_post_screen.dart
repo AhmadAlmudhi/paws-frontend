@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/general_widgets/image_upload.dart';
 
-//---
+
+
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
 
@@ -23,7 +24,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             Padding(
               padding: const EdgeInsets.all(30),
               child: Container(
-                height: 1000,
                 width: 90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -264,35 +264,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           },
                         ),
 
-                        const ImagePickerScreen(),
-
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     context.pushPage( ImagePickerScreen());
-                        //   },
-                        //   style: ElevatedButton.styleFrom(
-                        //     shape: const StadiumBorder(),
-                        //     padding: const EdgeInsets.all(3),
-                        //     backgroundColor:
-                        //         const Color.fromARGB(255, 226, 172, 117),
-                        //     fixedSize: const Size(420, 100),
-                        //     elevation: 0,
-                        //   ),
-                        //   child: const Text(
-                        //     "Upload",
-                        //     style: TextStyle(
-                        //       fontSize: 22,
-                        //       color: Color.fromARGB(202, 255, 255, 255),
-                        //     ),
-                        //   ),
-                        // ),
-                        // const EditImageScreen(),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
+            const ImagePickerScreen(),
             Center(
               child: ElevatedButton(
                 onPressed: () {
