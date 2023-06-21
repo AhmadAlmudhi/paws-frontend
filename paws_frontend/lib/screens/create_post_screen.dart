@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../widgets/general_widgets/image_upload.dart';
 
-//class CreatePostScreen extends StatefulWidget {
-
-  class offer extends StatefulWidget {
-  const offer({super.key});
+class CreatePostScreen extends StatefulWidget {
+  const CreatePostScreen({super.key});
 
   @override
-  State<offer> createState() => _offerState();
+  State<CreatePostScreen> createState() => _CreatePostScreenState();
 }
 
-class _offerState extends State<offer> {
+class _CreatePostScreenState extends State<CreatePostScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override

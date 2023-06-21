@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 class ImagePickerScreen extends StatefulWidget {
   const ImagePickerScreen({super.key});
 
-  // remove scaffold and body , floting button
-  //required this.title
-  //final String title;
   @override
   State<ImagePickerScreen> createState() => _ImagePickerScreenState();
 }
