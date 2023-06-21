@@ -24,7 +24,8 @@ class NavBarScreensState extends State<NavBarScreens> {
     return Scaffold(
         extendBody: true,
         bottomNavigationBar: DotNavigationBar(
-          backgroundColor: Colors.amberAccent,
+          backgroundColor: const Color.fromARGB(255, 248, 212, 177),
+
           currentIndex: widget.currentIndex,
           dotIndicatorColor: Colors.black,
           unselectedItemColor: Colors.grey,
