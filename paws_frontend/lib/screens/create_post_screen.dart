@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/general_widgets/image_upload.dart';
+
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key, required this.type});
 
@@ -113,7 +115,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 30,
+                              width: 20,
                             ),
                             Expanded(
                               child: TextFormField(
@@ -152,7 +154,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 30,
+                              width: 20,
                             ),
                             Expanded(
                               child: TextFormField(
@@ -194,7 +196,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 30,
+                              width: 20,
                             ),
                             Expanded(
                               child: TextFormField(
@@ -262,6 +264,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             return null;
                           },
                         ),
+                        const ImagePickerScreen()
                       ],
                     ),
                   ),
@@ -269,14 +272,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   //     // ElevatedButton(
                   //     //   onPressed: () {},
                   //     //   style: ElevatedButton.styleFrom(
-                  //     //     shape: const StadiumBorder(),
-                  //     //     padding: const EdgeInsets.all(3),
+                  //     //     shape:   StadiumBorder(),
+                  //     //     padding:   EdgeInsets.all(3),
                   //     //     backgroundColor:
-                  //     //         const Color.fromARGB(255, 226, 172, 117),
-                  //     //     fixedSize: const Size(420, 100),
+                  //     //           Color.fromARGB(255, 226, 172, 117),
+                  //     //     fixedSize:   Size(420, 100),
                   //     //     elevation: 0,
                   //     //   ),
-                  //     //   child: const Text(
+                  //     //   child:   Text(
                   //     //     "Upload",
                   //     //     style: TextStyle(
                   //     //       fontSize: 22,
@@ -308,7 +311,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   fixedSize: const Size(244, 52),
                   elevation: 0,
                 ),
-                //  style: const ButtonStyle( B elevation: 0.2, ),
+                //  style:   ButtonStyle( B elevation: 0.2, ),
                 child: const Text('Submit'),
               ),
             ),

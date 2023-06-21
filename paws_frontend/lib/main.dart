@@ -5,7 +5,7 @@ import 'package:paws_frontend/screens/home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  // GetStorage().erase();
+  //GetStorage().erase();
   runApp(const MainApp());
 }
 
