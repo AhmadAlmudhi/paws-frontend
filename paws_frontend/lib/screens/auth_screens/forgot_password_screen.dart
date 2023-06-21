@@ -56,13 +56,15 @@ class ForgotPasswordScreen extends StatelessWidget {
                             }
                           }
                           if (res.statusCode == 404) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text('Wrong email'),
-                                duration: Duration(seconds: 6),
-                              ),
-                            );
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text('Wrong email'),
+                                  duration: Duration(seconds: 6),
+                                ),
+                              );
+                            }
                           }
                         },
                       )

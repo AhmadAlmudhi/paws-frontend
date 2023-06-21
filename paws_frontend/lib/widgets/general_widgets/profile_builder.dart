@@ -9,9 +9,11 @@ import 'package:paws_frontend/services/user_api.dart';
 import 'package:paws_frontend/widgets/general_widgets/user_info.dart';
 
 class ProfileBuilder extends StatefulWidget {
-  const ProfileBuilder({super.key, required this.id});
+  const ProfileBuilder(
+      {super.key, required this.userId, required this.favorites});
 
-  final int id;
+  final int userId;
+  final List favorites;
 
   @override
   State<ProfileBuilder> createState() => _ProfileBuilderState();
@@ -21,7 +23,7 @@ class _ProfileBuilderState extends State<ProfileBuilder> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Response>(
-      future: getUser(widget.id),
+      future: getUser(widget.userId),
       builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -59,18 +61,20 @@ class _ProfileBuilderState extends State<ProfileBuilder> {
                   appBar: AppBar(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.black,
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                            (route) => false);
-                        GetStorage().erase();
-                        setState(() {});
-                      },
-                      icon: const Icon(Icons.logout),
-                    ),
+                    leading: !showEdit
+                        ? null
+                        : IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                  (route) => false);
+                              GetStorage().erase();
+                              setState(() {});
+                            },
+                            icon: const Icon(Icons.logout),
+                          ),
                     title: const Text("Profile"),
                     actions: [
                       Visibility(
@@ -90,6 +94,7 @@ class _ProfileBuilderState extends State<ProfileBuilder> {
                                   initPhone: phone,
                                   initGender: gender,
                                   initAge: age,
+                                  initImage: image,
                                 ),
                               ),
                             ).then((value) {
@@ -113,6 +118,8 @@ class _ProfileBuilderState extends State<ProfileBuilder> {
                     email: email,
                     whatsapp: whatsapp,
                     phone: phone,
+                    userId: widget.userId,
+                    favorites: widget.favorites,
                   ),
                 );
               }

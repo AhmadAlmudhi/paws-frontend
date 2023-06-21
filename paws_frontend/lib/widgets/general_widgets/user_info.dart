@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paws_frontend/widgets/general_widgets/tabs.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo(
@@ -13,7 +14,9 @@ class UserInfo extends StatelessWidget {
       required this.age,
       required this.email,
       required this.whatsapp,
-      required this.phone});
+      required this.phone,
+      required this.userId,
+      required this.favorites});
 
   final String name,
       username,
@@ -25,7 +28,9 @@ class UserInfo extends StatelessWidget {
       email,
       whatsapp,
       phone;
-  final int age;
+  final int age, userId;
+
+  final List favorites;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +50,14 @@ class UserInfo extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name),
+                  Visibility(
+                    visible: name.isNotEmpty,
+                    child: Text(
+                      name,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   Text(
                     "@$username",
                     style: const TextStyle(color: Colors.grey),
@@ -57,7 +69,8 @@ class UserInfo extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(bio),
+          // Visibility(visible: bio !="empty" , child: Text(gender),),
+          Visibility(visible: bio.isNotEmpty, child: Text(bio)),
           const SizedBox(
             height: 10,
           ),
@@ -66,14 +79,35 @@ class UserInfo extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.location_on_sharp),
-                  Text("$city , $country"),
+                  Visibility(
+                      visible: city.isNotEmpty || country.isNotEmpty,
+                      child: const Icon(Icons.location_on_sharp)),
+                  Visibility(visible: city.isNotEmpty, child: Text(city)),
+                  Visibility(
+                      visible: city.isNotEmpty && country.isNotEmpty,
+                      child: const Text(' ,')),
+                  Visibility(
+                      visible: country.isNotEmpty, child: Text(" $country"))
                 ],
               ),
-              Text("$gender | $age years"),
+              Row(
+                children: [
+                  Visibility(
+                    visible: gender.isNotEmpty,
+                    child: Text(gender),
+                  ),
+                  Visibility(
+                      visible: gender.isNotEmpty && age != 0,
+                      child: const Text(' |')),
+                  Visibility(
+                    visible: age != 0,
+                    child: Text(" $age years"),
+                  )
+                ],
+              ),
               ElevatedButton(
                 style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.amberAccent),
+                  backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 248, 212, 177),),
                   foregroundColor: MaterialStatePropertyAll(Colors.black),
                 ),
                 onPressed: () {
@@ -91,25 +125,50 @@ class UserInfo extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     "Contact",
-                                    style: TextStyle(fontSize: 30),
+                                    style: TextStyle(fontSize: 24 ,fontWeight: FontWeight.bold) ,
                                   ),
                                 ),
                               ),
-                              Text(
-                                "Email: $email",
-                                style: const TextStyle(fontSize: 18),
+                              const SizedBox(height: 8,),
+                              Row(
+                                children: [
+                                  const Icon(Icons.email_outlined),
+                                  const SizedBox(
+                                    width: 6,
+                                  ),
+                                  Text(
+                                    email,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 32),
-                                child: Text(
-                                  "Whatsapp: $whatsapp",
-                                  style: const TextStyle(fontSize: 18),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.messenger_outline_sharp),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    Text(
+                                      whatsapp,
+                                      style: const TextStyle(fontSize: 14),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Text(
-                                "Phone: $phone",
-                                style: const TextStyle(fontSize: 18),
+                              Row(
+                                children: [
+                                  const Icon(Icons.phone_in_talk_outlined),
+                                  const SizedBox(
+                                    width: 6,
+                                  ),
+                                  Text(
+                                    phone,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -119,6 +178,10 @@ class UserInfo extends StatelessWidget {
                 child: const Text("contact"),
               )
             ],
+          ),
+          tabs(
+            userId: userId,
+            favorites: favorites,
           ),
         ],
       ),

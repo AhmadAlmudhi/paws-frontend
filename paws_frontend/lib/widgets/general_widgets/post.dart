@@ -13,11 +13,14 @@ class Post extends StatelessWidget {
     required this.imagesLinks,
     required this.color,
     required this.id,
+    required this.update,
+    required this.userFavorites,
   });
 
   final String name, type, breed, color;
   final int age, favoritesNumber, id;
-  final List imagesLinks;
+  final List imagesLinks, userFavorites;
+  final Function() update;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +31,14 @@ class Post extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => PostDetailsScreen(
-                      id: id,
-                    )),
-          );
+              builder: (context) => PostDetailsScreen(
+                id: id,
+                userFavorites: userFavorites,
+              ),
+            ),
+          ).then((value) {
+            update.call();
+          });
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -83,27 +90,6 @@ class Post extends StatelessWidget {
                                 "$type | $breed | $color",
                                 style: const TextStyle(color: Colors.white),
                               ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.favorite_border,
-                                    color: Colors.white,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 4, right: 8),
-                                    child: Text(
-                                      "$favoritesNumber",
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  const Icon(
-                                    Icons.file_upload_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ],

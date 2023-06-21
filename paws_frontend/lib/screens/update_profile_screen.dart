@@ -1,20 +1,29 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:paws_frontend/screens/Nav_screens/nav_bar_screens.dart';
 import 'package:paws_frontend/services/user_api.dart';
+
+import '../widgets/general_widgets/loading.dart';
+import '../widgets/image_paker.dart';
 
 //class UpdateProfileScreen extends StatelessWidget
 
 class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen(
-      {super.key,
-      required this.initName,
-      required this.initBio,
-      required this.initCountry,
-      required this.initCity,
-      required this.initEmail,
-      required this.initWhatsapp,
-      required this.initPhone,
-      required this.initGender,
-      required this.initAge});
+  const UpdateProfileScreen({
+    super.key,
+    required this.initName,
+    required this.initBio,
+    required this.initCountry,
+    required this.initCity,
+    required this.initEmail,
+    required this.initWhatsapp,
+    required this.initPhone,
+    required this.initGender,
+    required this.initAge,
+    required this.initImage,
+  });
 
   final String initName,
       initBio,
@@ -23,7 +32,8 @@ class UpdateProfileScreen extends StatefulWidget {
       initEmail,
       initWhatsapp,
       initPhone,
-      initGender;
+      initGender,
+      initImage;
 
   final int initAge;
 
@@ -35,6 +45,7 @@ class UpdateProfileScreen extends StatefulWidget {
 
 class UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final _formKey = GlobalKey<FormState>();
+  Imagepicker controller = Get.put(Imagepicker());
 
   @override
   Widget build(BuildContext context) {
@@ -71,19 +82,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
         actions: [
           TextButton(
             onPressed: () async {
-              showDialog<String>(
-                context: context,
-                builder: (context) {
-                  return const Scaffold(
-                    backgroundColor: Color.fromARGB(30, 0, 0, 0),
-                    body: Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    ),
-                  );
-                },
-              );
+              loading(context);
               await updateProfile(
                 {
                   "name": nameController.text,
@@ -97,9 +96,20 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   "age": ageController.text,
                 },
               );
+
+              if (controller.imagePath.isNotEmpty) {
+                await updateProfileImage(File(controller.imagePath.toString()));
+              }
+
               if (context.mounted) {
-                Navigator.pop(context);
-                Navigator.pop(context);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NavBarScreens(
+                        currentIndex: 2,
+                      ),
+                    ),
+                    (Route<dynamic> route) => false);
               }
             },
             child: const Text("Done", style: TextStyle(fontSize: 12)),
@@ -110,17 +120,28 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
         child: ListView(
           children: [
-            const CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(
-                  "https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb"),
-            ),
+            controller.imagePath.isNotEmpty
+                ? Image.file(
+                    File(controller.imagePath.toString()),
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.contain,
+                  )
+                : Image.network(
+                    widget.initImage,
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.contain,
+                  ),
             TextButton(
               //---------------
-              onPressed: () {},
+              onPressed: () async {
+                await controller.getImage();
+                setState(() {});
+              },
               child: const Text(
                 "Update Picture",
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.blue, fontSize: 20),
               ),
             ),
             const SizedBox(
@@ -134,7 +155,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: nameController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Name',
                       hintText: ' name',
                     ),
                     //   autofillHints:,
@@ -150,7 +171,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: bioController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Bio',
                       hintText: ' Bio',
                     ),
                     //   autofillHints:,
@@ -173,7 +194,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: countryController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Country',
                       hintText: 'Country',
                     ),
                     //   autofillHints:,
@@ -189,7 +210,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: cityController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'City',
                       hintText: 'City',
                     ),
                     //   autofillHints:,
@@ -212,7 +233,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Email',
                       hintText: 'Email',
                     ),
                     //   autofillHints:,
@@ -228,7 +249,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: whatsappController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Whatsapp',
                       hintText: 'Whatsapp',
                     ),
                     //   autofillHints:,
@@ -244,7 +265,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: phoneController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Phone',
                       hintText: 'Phone',
                     ),
                     //   autofillHints:,
@@ -267,7 +288,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: genderController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Gender',
                       hintText: 'Gender',
                     ),
                     //   autofillHints:,
@@ -283,7 +304,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: ageController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Age',
                       hintText: 'Age',
                     ),
                     //   autofillHints:,

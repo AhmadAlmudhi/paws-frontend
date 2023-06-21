@@ -36,11 +36,15 @@ class SignupButton extends StatelessWidget {
             }
           }
           if (res.statusCode == 400) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              backgroundColor: Colors.red,
-              content: Text('Please enter all information'),
-              duration: Duration(seconds: 6),
-            ));
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('Please enter all information'),
+                  duration: Duration(seconds: 6),
+                ),
+              );
+            }
           }
         },
         child: const Text(

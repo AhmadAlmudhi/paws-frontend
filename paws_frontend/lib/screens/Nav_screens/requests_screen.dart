@@ -20,7 +20,10 @@ class RequestsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: const [
-          PostsBuilder(type: 'request'),
+          PostsBuilder(
+            type: 'request',
+            userFavorites: [],
+          ),
         ],
       ),
     );
