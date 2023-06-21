@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:paws_frontend/screens/Nav_screens/nav_bar_screens.dart';
 import 'package:paws_frontend/services/user_api.dart';
 
 import '../widgets/general_widgets/loading.dart';
@@ -101,8 +102,14 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
               }
 
               if (context.mounted) {
-                Navigator.pop(context);
-                Navigator.pop(context);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NavBarScreens(
+                        currentIndex: 2,
+                      ),
+                    ),
+                    (Route<dynamic> route) => false);
               }
             },
             child: const Text("Done", style: TextStyle(fontSize: 12)),
@@ -131,10 +138,6 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
               onPressed: () async {
                 await controller.getImage();
                 setState(() {});
-                print(controller.imagePath);
-                print(
-                  File(controller.imagePath.toString()),
-                );
               },
               child: const Text(
                 "Update Picture",

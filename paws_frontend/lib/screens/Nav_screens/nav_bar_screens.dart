@@ -5,15 +5,15 @@ import 'package:paws_frontend/screens/Nav_screens/requests_screen.dart';
 import 'package:paws_frontend/screens/Nav_screens/profile_screen.dart';
 
 class NavBarScreens extends StatefulWidget {
-  const NavBarScreens({super.key});
+  NavBarScreens({super.key, this.currentIndex = 1});
+
+  int currentIndex;
 
   @override
   NavBarScreensState createState() => NavBarScreensState();
 }
 
 class NavBarScreensState extends State<NavBarScreens> {
-  int currentIndex = 1;
-
   List myScreenList = [
     const RequestsScreen(),
     const OffersScreen(),
@@ -25,12 +25,13 @@ class NavBarScreensState extends State<NavBarScreens> {
         extendBody: true,
         bottomNavigationBar: DotNavigationBar(
           backgroundColor: const Color.fromARGB(255, 248, 212, 177),
-          currentIndex: currentIndex,
+
+          currentIndex: widget.currentIndex,
           dotIndicatorColor: Colors.black,
           unselectedItemColor: Colors.grey,
           selectedItemColor: Colors.black,
           onTap: (index) {
-            currentIndex = index;
+            widget.currentIndex = index;
             setState(() {});
           },
           items: [
@@ -45,6 +46,6 @@ class NavBarScreensState extends State<NavBarScreens> {
             ),
           ],
         ),
-        body: myScreenList[currentIndex]);
+        body: myScreenList[widget.currentIndex]);
   }
 }
