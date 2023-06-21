@@ -152,7 +152,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: nameController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Name',
                       hintText: ' name',
                     ),
                     //   autofillHints:,
@@ -168,7 +168,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: bioController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Bio',
                       hintText: ' Bio',
                     ),
                     //   autofillHints:,
@@ -191,7 +191,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: countryController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Country',
                       hintText: 'Country',
                     ),
                     //   autofillHints:,
@@ -207,7 +207,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: cityController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'City',
                       hintText: 'City',
                     ),
                     //   autofillHints:,
@@ -230,7 +230,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Email',
                       hintText: 'Email',
                     ),
                     //   autofillHints:,
@@ -246,7 +246,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: whatsappController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Whatsapp',
                       hintText: 'Whatsapp',
                     ),
                     //   autofillHints:,
@@ -262,7 +262,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: phoneController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Phone',
                       hintText: 'Phone',
                     ),
                     //   autofillHints:,
@@ -285,7 +285,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: genderController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Gender',
                       hintText: 'Gender',
                     ),
                     //   autofillHints:,
@@ -301,7 +301,7 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   TextFormField(
                     controller: ageController,
                     decoration: const InputDecoration(
-                      // labelText: 'Name',
+                      labelText: 'Age',
                       hintText: 'Age',
                     ),
                     //   autofillHints:,
