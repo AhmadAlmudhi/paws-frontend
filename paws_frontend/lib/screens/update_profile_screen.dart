@@ -138,10 +138,6 @@ class UpdateProfileScreenState extends State<UpdateProfileScreen> {
               onPressed: () async {
                 await controller.getImage();
                 setState(() {});
-                print(controller.imagePath);
-                print(
-                  File(controller.imagePath.toString()),
-                );
               },
               child: const Text(
                 "Update Picture",
