@@ -3,20 +3,35 @@ import 'dart:io';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 
-Future<Response> createPost(Map data, List imagesFiles) async {
-  List imageLinks = [];
+import '../widgets/general_widgets/image_upload.dart';
 
-  for (File file in imagesFiles) {
-    final bytes = await file.readAsBytes();
-    imageLinks.add(bytes);
+Future<Response> createPost(Map data) async {
+  List imagesLinks = [];
+
+  for (var file in pickedImages) {
+    final Response link = await getImageUrl(file);
+    if (link.statusCode == 200) {
+      imagesLinks.add(jsonDecode(link.body)["url"]);
+    }
   }
+  pickedImages.clear();
 
-  data.addAll({"images": imageLinks});
+  data.addAll({"images": imagesLinks});
 
   Uri uri = Uri.parse("http://0.0.0.0:8080/post/create");
   Response response = await post(uri,
       body: jsonEncode(data),
       headers: {"authorization": GetStorage().read("token")});
+
+  return response;
+}
+
+Future<Response> getImageUrl(File file) async {
+  final bytes = await file.readAsBytes();
+
+  Uri uri = Uri.parse("http://0.0.0.0:8080/post/get_image_url");
+  Response response = await post(uri,
+      body: bytes, headers: {"authorization": GetStorage().read("token")});
 
   return response;
 }

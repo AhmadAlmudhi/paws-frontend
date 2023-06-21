@@ -22,7 +22,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
     //allowedImageTypes: ['png', 'jpg', 'jpeg'],
     // withData: true,
     //withReadStream: true,
-
   );
   final imagePaths = [];
   @override
@@ -31,7 +30,15 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         ElevatedButton(
-            onPressed: () => pickImage(), child: const Text("click me")),
+          style: const ButtonStyle(
+              backgroundColor:
+                  MaterialStatePropertyAll(Color.fromARGB(255, 226, 172, 117))),
+          onPressed: () => pickImage(),
+          child: const Text(
+            "Add images",
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
         if (imagePaths.isEmpty) const Text(""),
         if (imagePaths.isNotEmpty)
           SizedBox(
@@ -48,7 +55,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
             ),
           )
       ],
-
     );
   }
 
@@ -59,6 +65,8 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       setState(() {
         imagePaths.clear();
         for (var element in image) {
+          File f = File(element.path);
+          pickedImages.add(f);
           imagePaths.add(element.path);
         }
       });
@@ -67,3 +75,5 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
     }
   }
 }
+
+final List<File> pickedImages = [];

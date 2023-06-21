@@ -5,6 +5,7 @@ AppBar createAppBar({
   required String title,
   required IconData icon,
   required Widget iconDestination,
+  required Function update,
 }) {
   return AppBar(
     backgroundColor: Colors.white,
@@ -16,7 +17,7 @@ AppBar createAppBar({
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => iconDestination),
-          );
+          ).then((value) => update.call());
         },
         icon: Icon(icon),
       ),

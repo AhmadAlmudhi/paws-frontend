@@ -234,7 +234,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                             children: [
                               Container(
                                 height: 220,
-                                width: 366,
+                                width: MediaQuery.of(context).size.width,
                                 decoration: const BoxDecoration(
                                   color: Color.fromARGB(255, 248, 212, 177),
                                   borderRadius: BorderRadius.all(
