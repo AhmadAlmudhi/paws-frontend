@@ -4,6 +4,8 @@ import 'package:paws_frontend/widgets/general_widgets/loading.dart';
 
 import '../widgets/general_widgets/image_upload.dart';
 
+import '../widgets/general_widgets/image_upload.dart';
+
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key, required this.type});
 
@@ -130,7 +132,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 30,
+                              width: 20,
                             ),
                             Expanded(
                               child: TextFormField(
@@ -171,7 +173,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 30,
+                              width: 20,
                             ),
                             Expanded(
                               child: TextFormField(
@@ -215,7 +217,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                             ),
                             const SizedBox(
-                              width: 30,
+                              width: 20,
                             ),
                             Expanded(
                               child: TextFormField(
@@ -286,9 +288,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             return null;
                           },
                         ),
+                        const ImagePickerScreen()
                       ],
                     ),
                   ),
+
                 ),
               ),
             ),
@@ -322,7 +326,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   fixedSize: const Size(244, 52),
                   elevation: 0,
                 ),
-                //  style: const ButtonStyle( B elevation: 0.2, ),
+                //  style:   ButtonStyle( B elevation: 0.2, ),
                 child: const Text('Submit'),
               ),
             ),

@@ -1,6 +1,11 @@
-import 'package:multi_image_picker_view/multi_image_picker_view.dart';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker_view/multi_image_picker_view.dart';
+
+//--
 
 //--
 class ImagePickerScreen extends StatefulWidget {
@@ -13,47 +18,52 @@ class ImagePickerScreen extends StatefulWidget {
 class _ImagePickerScreenState extends State<ImagePickerScreen> {
   final controller = MultiImagePickerController(
     maxImages: 5,
-    allowedImageTypes: ['png', 'jpg', 'jpeg'],
-    withData: true,
-    withReadStream: true,
-  );
 
+    //allowedImageTypes: ['png', 'jpg', 'jpeg'],
+    // withData: true,
+    //withReadStream: true,
+
+  );
+  final imagePaths = [];
   @override
   Widget build(BuildContext context) {
-    return
-        // appBar: AppBar(
-        //   title: Text(widget.title),
-        // ),
-        // floatingActionButton: FloatingActionButton.extended(
-        //   onPressed: () async {
-        //     final images = controller.images; // return Iterable<ImageFile>
-        //     for (final image in images) {
-        //       if (image.hasPath) {
-        //         print(image.path!);
-        //       } else {
-        //         print(image.bytes!);
-        //       }
-        //       // request.addFileBytes(image.data!);
-        //     }
-        //     // request.send();
-        //   },
-        //   label: const Text('Pick images'),
-        //   icon: const Icon(Icons.add),
-        // ),
-        Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'Pick images, the max is 5',
-          ),
-          MultiImagePickerView(
-            controller: controller,
-            padding: const EdgeInsets.all(10),
-            // link of selected images
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        ElevatedButton(
+            onPressed: () => pickImage(), child: const Text("click me")),
+        if (imagePaths.isEmpty) const Text(""),
+        if (imagePaths.isNotEmpty)
+          SizedBox(
+            height: 100,
+            child: GridView.count(
+              shrinkWrap: true,
+              primary: false,
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.all(4),
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+              crossAxisCount: 1,
+              children: imagePaths.map((e) => Image.file(File(e))).toList(),
+            ),
           )
-        ],
-      ),
+      ],
+
     );
+  }
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickMultiImage();
+
+      setState(() {
+        imagePaths.clear();
+        for (var element in image) {
+          imagePaths.add(element.path);
+        }
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
   }
 }
