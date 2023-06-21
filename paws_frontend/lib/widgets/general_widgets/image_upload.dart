@@ -7,6 +7,7 @@ import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 
 //--
 
+//--
 class ImagePickerScreen extends StatefulWidget {
   const ImagePickerScreen({super.key});
 
@@ -17,9 +18,11 @@ class ImagePickerScreen extends StatefulWidget {
 class _ImagePickerScreenState extends State<ImagePickerScreen> {
   final controller = MultiImagePickerController(
     maxImages: 5,
+
     //allowedImageTypes: ['png', 'jpg', 'jpeg'],
     // withData: true,
     //withReadStream: true,
+
   );
   final imagePaths = [];
   @override
@@ -45,6 +48,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
             ),
           )
       ],
+
     );
   }
 

@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetStorage().hasData("token")
-        ? const NavBarScreens()
+        ? NavBarScreens()
         : const LoginScreen();
   }
 }

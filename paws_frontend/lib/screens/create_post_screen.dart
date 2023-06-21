@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:paws_frontend/services/post_api.dart';
+import 'package:paws_frontend/widgets/general_widgets/loading.dart';
+
+import '../widgets/general_widgets/image_upload.dart';
 
 import '../widgets/general_widgets/image_upload.dart';
 
@@ -16,6 +20,17 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController typeController = TextEditingController();
+    TextEditingController breedController = TextEditingController();
+    TextEditingController colorController = TextEditingController();
+    TextEditingController genderController = TextEditingController();
+    TextEditingController ageController = TextEditingController();
+    TextEditingController microchippedController = TextEditingController();
+    TextEditingController vaccinatedController = TextEditingController();
+    TextEditingController fixedController = TextEditingController();
+    TextEditingController contentController = TextEditingController();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -24,7 +39,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             Padding(
               padding: const EdgeInsets.all(30),
               child: Container(
-                height: 670,
                 width: 90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -61,8 +75,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           children: [
                             Expanded(
                               child: TextFormField(
+                                controller: nameController,
                                 decoration: const InputDecoration(
-                                  hintText: ' name',
+                                  hintText: 'name',
                                 ),
                                 //   autofillHints:,
                                 cursorColor: Colors.black,
@@ -80,6 +95,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                             Expanded(
                               child: TextFormField(
+                                controller: typeController,
                                 decoration: const InputDecoration(
                                   hintText: 'type',
                                 ),
@@ -100,6 +116,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           children: [
                             Expanded(
                               child: TextFormField(
+                                controller: breedController,
                                 decoration: const InputDecoration(
                                   hintText: 'breed',
                                 ),
@@ -119,6 +136,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                             Expanded(
                               child: TextFormField(
+                                controller: colorController,
                                 decoration: const InputDecoration(
                                   hintText: 'Color',
                                 ),
@@ -139,6 +157,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           children: [
                             Expanded(
                               child: TextFormField(
+                                controller: genderController,
                                 decoration: const InputDecoration(
                                   hintText: 'Gender',
                                 ),
@@ -158,6 +177,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                             Expanded(
                               child: TextFormField(
+                                controller: ageController,
                                 decoration: const InputDecoration(
                                   hintText: 'Age',
                                 ),
@@ -181,6 +201,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           children: [
                             Expanded(
                               child: TextFormField(
+                                controller: microchippedController,
                                 decoration: const InputDecoration(
                                   hintText: 'Microchipped',
                                 ),
@@ -200,6 +221,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                             Expanded(
                               child: TextFormField(
+                                controller: vaccinatedController,
                                 decoration: const InputDecoration(
                                   hintText: 'Vaccinated',
                                 ),
@@ -221,6 +243,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             Expanded(
                               flex: 1,
                               child: TextFormField(
+                                controller: fixedController,
                                 decoration: const InputDecoration(
                                   hintText: 'Fixed',
                                 ),
@@ -251,6 +274,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ],
                         ),
                         TextFormField(
+                          controller: contentController,
                           decoration: const InputDecoration(
                             hintText: 'Content',
                           ),
@@ -269,40 +293,31 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     ),
                   ),
 
-                  //     // ElevatedButton(
-                  //     //   onPressed: () {},
-                  //     //   style: ElevatedButton.styleFrom(
-                  //     //     shape:   StadiumBorder(),
-                  //     //     padding:   EdgeInsets.all(3),
-                  //     //     backgroundColor:
-                  //     //           Color.fromARGB(255, 226, 172, 117),
-                  //     //     fixedSize:   Size(420, 100),
-                  //     //     elevation: 0,
-                  //     //   ),
-                  //     //   child:   Text(
-                  //     //     "Upload",
-                  //     //     style: TextStyle(
-                  //     //       fontSize: 22,
-                  //     //       color: Color.fromARGB(202, 255, 255, 255),
-                  //     //     ),
-                  //     //   ),
-                  //     // ),
-
-                  // ),
                 ),
               ),
             ),
+            const ImagePickerScreen(),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  //Validate returns true if the form is valid, or false otherwise.
-                  if (_formKey.currentState!.validate()) {
-                    //   If the form is valid, display a snackbar. In the real world,
-                    // you'd often call a server or save the information in a database.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
+                onPressed: () async {
+                  loading(context);
+                  await createPost({
+                    "post_type": widget.type,
+                    "name": nameController.text,
+                    "type": typeController.text,
+                    "breed": breedController.text,
+                    "color": colorController.text,
+                    "gender": genderController.text,
+                    "age": ageController.text,
+                    "microchipped":
+                        microchippedController.text == "microchipped",
+                    "vaccinated": vaccinatedController.text == "vaccinated",
+                    "fixed": fixedController.text == "fixed",
+                    "content": contentController.text,
+                  }, []);
+
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),

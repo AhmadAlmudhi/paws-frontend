@@ -48,7 +48,7 @@ class tabsState extends State<tabs> with SingleTickerProviderStateMixin {
                   padding: const EdgeInsets.all(5),
                   child: TabBar(
                     // indicator: BoxDecoration(color: Colors.black),
-                    indicatorColor: Colors.amberAccent,
+                    indicatorColor:const Color.fromARGB(255, 248, 212, 177),
                     labelColor: Colors.black,
                     controller: tabController,
                     tabs: const [

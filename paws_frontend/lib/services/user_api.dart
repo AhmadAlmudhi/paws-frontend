@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 
@@ -27,11 +28,11 @@ Future<Response> updateProfile(Map data) async {
   return response;
 }
 
-Future<Response> updateProfileImage(Map data) async {
+Future<Response> updateProfileImage(File data) async {
+  final bytes = await data.readAsBytes();
   Uri uri = Uri.parse("http://0.0.0.0:8080/user/update_image");
   Response response = await put(uri,
-      body: jsonEncode(data),
-      headers: {"authorization": GetStorage().read("token")});
+      body: bytes, headers: {"authorization": GetStorage().read("token")});
 
   return response;
 }

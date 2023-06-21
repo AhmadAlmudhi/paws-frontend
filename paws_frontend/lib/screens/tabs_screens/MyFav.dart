@@ -23,13 +23,17 @@ class _FavState extends State<Fav> {
       builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return const Center(
-                child: Padding(
-              padding: EdgeInsets.only(top: 32),
-              child: CircularProgressIndicator(
-                color: Colors.black,
-              ),
-            ));
+            return const Column(
+              children: [
+                Center(
+                    child: Padding(
+                  padding: EdgeInsets.only(top: 32),
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
+                )),
+              ],
+            );
           default:
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
