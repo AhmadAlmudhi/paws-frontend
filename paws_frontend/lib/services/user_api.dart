@@ -29,10 +29,10 @@ Future<Response> updateProfile(Map data) async {
 }
 
 Future<Response> updateProfileImage(File data) async {
+  final bytes = await data.readAsBytes();
   Uri uri = Uri.parse("http://0.0.0.0:8080/user/update_image");
   Response response = await put(uri,
-      body: jsonEncode(data),
-      headers: {"authorization": GetStorage().read("token")});
+      body: bytes, headers: {"authorization": GetStorage().read("token")});
 
   return response;
 }
